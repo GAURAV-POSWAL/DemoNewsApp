@@ -1,6 +1,6 @@
 package com.gaurav.newsapp.network
 
-import com.gaurav.newsapp.model.NewsApiResponse
+import com.gaurav.newsapp.data.NewsApiResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,9 +15,8 @@ interface NewsService {
 
     }
 //    https://newsapi.org/v2/top-headlines?country=in&apiKey=4924976cf70e42f5bbfbb09e6fe47eaa
-    @GET(API_VERSION + "top-headlines?")
-    fun getNewsHeadlines(@Query("country")id:String=COUNTRY_CODE,
-                         @Query("apiKey") appID:String= API_KEY):
+    @GET(API_VERSION + "top-headlines?" + "country=in")
+    fun getNewsHeadlines(@Query("apiKey") appID:String= API_KEY):
             Call<NewsApiResponse>
 
 }

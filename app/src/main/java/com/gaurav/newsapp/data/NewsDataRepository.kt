@@ -1,4 +1,4 @@
-package com.gaurav.newsapp.model
+package com.gaurav.newsapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
