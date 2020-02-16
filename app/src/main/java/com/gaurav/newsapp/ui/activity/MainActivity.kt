@@ -1,6 +1,7 @@
 package com.gaurav.newsapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val linearLayoutManager = LinearLayoutManager(this)
         rvNews.layoutManager = linearLayoutManager
-        recyclerAdapter = RecyclerAdapter(newsArticlesList)
+        recyclerAdapter = RecyclerAdapter(newsArticlesList, this)
         rvNews.adapter = recyclerAdapter
         // for line separation between items
         val dividerItemDecoration =
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun populateNewsList(newData: ArrayList<Article>) {
+        rvNews.visibility = View.VISIBLE
         recyclerAdapter.updateList(newData)
     }
 

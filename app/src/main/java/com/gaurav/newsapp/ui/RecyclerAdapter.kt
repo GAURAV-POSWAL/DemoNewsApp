@@ -1,33 +1,35 @@
 package com.gaurav.newsapp.ui
 
-import android.text.format.DateFormat
-import android.util.Log
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.gaurav.newsapp.R
 import com.gaurav.newsapp.data.Article
-import com.gaurav.newsapp.data.NewsApiResponse
-import java.util.*
-import kotlin.collections.ArrayList
+import com.gaurav.newsapp.ui.activity.NewsDetailActivity
+import com.gaurav.newsapp.ui.activity.NewsDetailActivity.Companion.INTENT_DATA
+import kotlinx.android.synthetic.main.adapter_news.view.*
 
 
-class RecyclerAdapter(private val newsList: ArrayList<Article>) :
-    RecyclerView.Adapter<RecyclerAdapter.WeatherHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherHolder {
+class RecyclerAdapter(private val newsList: ArrayList<Article>, private val mContext: Context) :
+    RecyclerView.Adapter<RecyclerAdapter.NewsHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
         val inflatedView = parent.inflate(R.layout.adapter_news, false)
-        return WeatherHolder(inflatedView)
+        return NewsHolder(inflatedView)
     }
 
     override fun getItemCount() = newsList.size
 
-    override fun onBindViewHolder(holder: WeatherHolder, position: Int) {
+    override fun onBindViewHolder(holder: NewsHolder, position: Int) {
         if (newsList.size > 0) {
 
-            val itemPhoto = newsList[position]
-            holder.bindPhoto(itemPhoto)
+            val article = newsList[position]
+            holder.bindPhoto(article)
         }
     }
 
@@ -38,9 +40,7 @@ class RecyclerAdapter(private val newsList: ArrayList<Article>) :
 
     }
 
-
-    class WeatherHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        private lateinit var newsArticle: Article
+   inner class NewsHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         private var view: View = v
 
         init {
@@ -49,19 +49,17 @@ class RecyclerAdapter(private val newsList: ArrayList<Article>) :
         }
 
         override fun onClick(v: View?) {
-            Log.d("RecyclerView", "CLICK!")
+            val intent = Intent(mContext, NewsDetailActivity::class.java)
+            intent.putExtra(INTENT_DATA, newsList[adapterPosition])
+            mContext.startActivity(intent)
         }
+
 
         fun bindPhoto(newsArticle: Article) {
-            this.newsArticle = newsArticle
-        }
-
-
-        private fun getDayNameFromTimeStamp(timeStamp: Long): String {
-
-            val calendar = Calendar.getInstance(Locale.ENGLISH)
-            calendar.timeInMillis = timeStamp * 1000L
-            return DateFormat.format("EEEE", calendar).toString()
+            view.tvTitle.text = newsArticle.title
+            view.tvSource.text = newsArticle.source?.name
+            view.tvContent.text = newsArticle.description
+            Glide.with(mContext).applyDefaultRequestOptions(RequestOptions().error(R.mipmap.ic_launcher)).load(newsArticle.urlToImage).into(view.ivSourceImage)
         }
     }
 

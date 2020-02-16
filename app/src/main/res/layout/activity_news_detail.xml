@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/ivNewsLogo"
+        android:id="@+id/ivNewsSource"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:src="@mipmap/ic_launcher"
@@ -22,11 +22,11 @@
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/tvArtistName"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tvArtistName"
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -36,13 +36,13 @@
         android:ellipsize="end"
         android:text="@string/app_name"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/ivNewsLogo"
-        app:layout_constraintBottom_toTopOf="@+id/tvTrackName"
+        app:layout_constraintTop_toBottomOf="@+id/ivNewsSource"
+        app:layout_constraintBottom_toTopOf="@+id/tvSource"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tvTrackName"
+        android:id="@+id/tvSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -52,13 +52,13 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:text="@string/app_name"
-        app:layout_constraintTop_toBottomOf="@+id/tvArtistName"
-        app:layout_constraintBottom_toTopOf="@+id/tvCollectionName"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintBottom_toTopOf="@+id/tvContent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tvCollectionName"
+        android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -68,7 +68,7 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:text="@string/app_name"
-        app:layout_constraintTop_toBottomOf="@+id/tvTrackName"
+        app:layout_constraintTop_toBottomOf="@+id/tvSource"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
