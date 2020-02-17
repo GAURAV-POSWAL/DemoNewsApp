@@ -1,5 +1,7 @@
 package com.gaurav.newsapp.di
 
+import androidx.room.Room
+import com.gaurav.newsapp.data.db.RepoDatabase
 import com.gaurav.newsapp.network.NewsService
 import dagger.Module
 import dagger.Provides
@@ -38,6 +40,8 @@ class NetworkModule {
     fun gsonConvertor(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
+
+
 
 
     @Singleton

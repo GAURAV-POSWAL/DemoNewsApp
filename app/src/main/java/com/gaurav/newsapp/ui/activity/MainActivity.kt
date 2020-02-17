@@ -12,20 +12,24 @@ import com.gaurav.newsapp.Utils
 import com.gaurav.newsapp.base.MyApplication
 import com.gaurav.newsapp.data.Article
 import com.gaurav.newsapp.data.NewsApiResponse
+import com.gaurav.newsapp.data.NewsDataRepository
 import com.gaurav.newsapp.ui.RecyclerAdapter
 import com.gaurav.newsapp.viewmodel.NewsViewModel
+import com.gaurav.newsapp.viewmodel.NewsViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    lateinit var newsViewModel: NewsViewModel
+    private lateinit var newsViewModel: NewsViewModel
+    @Inject
+    lateinit var newsDataRepository: NewsDataRepository
 
     /**
      * Injecting via dagger
      * Profit is that we don't need to create every different viewModelFactory class with different params
      */
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+//    @Inject
+//    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val newsArticlesList = ArrayList<Article>()
     private lateinit var recyclerAdapter: RecyclerAdapter
 
@@ -34,13 +38,17 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val factory = NewsViewModelFactory(newsDataRepository)
         newsViewModel =
-            ViewModelProvider(this, viewModelFactory)[NewsViewModel::class.java]
+            ViewModelProvider(this, factory)[NewsViewModel::class.java]
         setupRecyclerView()
 
         showLoader(true)
         getNewsData()
+
+        swiperefresh.setOnRefreshListener {
+            getNewsData()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -57,21 +65,18 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getNewsData() {
-        if (Utils.isOnline(this))
-            newsViewModel.getNewsData().observe(
-                this, Observer<NewsApiResponse> {
-                    showLoader(false)
-                    if (it != null) {
-                        newsViewModel.setNewsArticlesList(it.articles)
-                        populateNewsList(it.articles)
-                    }
-//                    else showErrorScreen(true)
-                })
-//        else showErrorScreen(true, offline = true)
+            newsViewModel.getNewsData().observe(this, Observer<NewsApiResponse> {
+                showLoader(false)
+        swiperefresh.isRefreshing = false
+                if (it != null) {
+                    newsViewModel.setNewsArticlesList(it.articles)
+                    populateNewsList(it.articles)
+                }
+            })
 
     }
 
-    private fun populateNewsList(newData: ArrayList<Article>) {
+    private fun populateNewsList(newData: List<Article>) {
         rvNews.visibility = View.VISIBLE
         recyclerAdapter.updateList(newData)
     }

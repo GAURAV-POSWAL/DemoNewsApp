@@ -10,7 +10,7 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(private val newsRepo: NewsDataRepository) : ViewModel() {
 
     private var news: NewsApiResponse? = null
-    var articlesList: ArrayList<Article>? = null
+    var articlesList: List<Article>? = null
 
     fun getNewsData(): LiveData<NewsApiResponse> {
 
@@ -21,7 +21,7 @@ class NewsViewModel @Inject constructor(private val newsRepo: NewsDataRepository
         this.news = news
     }
 
-    fun setNewsArticlesList(articlesList: ArrayList<Article>) {
+    fun setNewsArticlesList(articlesList: List<Article>) {
         this.articlesList = articlesList
     }
 

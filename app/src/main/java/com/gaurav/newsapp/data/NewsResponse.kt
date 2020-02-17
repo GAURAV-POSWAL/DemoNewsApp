@@ -1,12 +1,20 @@
 package com.gaurav.newsapp.data
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+@Entity
 data class NewsApiResponse(
+
+    @PrimaryKey(autoGenerate = true)
+    val uid: Int,
+
     @SerializedName("articles")
-    val articles: ArrayList<Article>,
+
+    val articles: List<Article>,
     @SerializedName("status")
     val status: String?,
     @SerializedName("totalResults")

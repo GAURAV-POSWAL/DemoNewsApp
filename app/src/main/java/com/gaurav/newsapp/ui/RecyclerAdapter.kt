@@ -27,13 +27,13 @@ class RecyclerAdapter(private val newsList: ArrayList<Article>, private val mCon
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
         if (newsList.size > 0) {
-
             val article = newsList[position]
             holder.bindPhoto(article)
+
         }
     }
 
-    fun updateList(newData: ArrayList<Article>) {
+    fun updateList(newData: List<Article>) {
         newsList.clear()
         newsList.addAll(newData)
         notifyDataSetChanged()
