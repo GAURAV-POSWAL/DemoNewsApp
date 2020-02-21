@@ -11,5 +11,4 @@ interface AppComponent {
     fun inject(activity: MainActivity)
 
 
-
 }

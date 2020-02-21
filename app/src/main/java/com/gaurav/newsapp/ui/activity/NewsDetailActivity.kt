@@ -1,8 +1,7 @@
 package com.gaurav.newsapp.ui.activity
 
+import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -30,5 +29,7 @@ class NewsDetailActivity : AppCompatActivity(R.layout.activity_news_detail) {
         tvTitle.text = article.title
         tvSource.text = article.source?.name
         tvContent.text = article.content
+
+        getSharedPreferences("sdjkh", Context.MODE_PRIVATE)
     }
 }

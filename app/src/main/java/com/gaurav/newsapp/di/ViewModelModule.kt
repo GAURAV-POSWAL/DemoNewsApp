@@ -2,13 +2,9 @@ package com.gaurav.newsapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.gaurav.newsapp.data.NewsDataRepository
-import com.gaurav.newsapp.data.db.RepoDatabase
-import com.gaurav.newsapp.network.NewsService
 import com.gaurav.newsapp.viewmodel.NewsViewModel
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
 
 @Module

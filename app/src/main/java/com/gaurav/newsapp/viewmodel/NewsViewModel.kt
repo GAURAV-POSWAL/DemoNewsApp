@@ -7,7 +7,7 @@ import com.gaurav.newsapp.data.NewsApiResponse
 import com.gaurav.newsapp.data.NewsDataRepository
 import javax.inject.Inject
 
-class NewsViewModel @Inject constructor(private val newsRepo: NewsDataRepository) : ViewModel() {
+class NewsViewModel constructor(private val newsRepo: NewsDataRepository) : ViewModel() {
 
     private var news: NewsApiResponse? = null
     var articlesList: List<Article>? = null

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaurav.newsapp.R
-import com.gaurav.newsapp.Utils
 import com.gaurav.newsapp.base.MyApplication
 import com.gaurav.newsapp.data.Article
 import com.gaurav.newsapp.data.NewsApiResponse
